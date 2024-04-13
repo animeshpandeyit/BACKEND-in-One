@@ -1,5 +1,18 @@
 import express from "express";
-import { registerUser } from "../controllers/user.js";
+import {
+  getCurrentUser,
+  getMyDetails,
+  login,
+  logout,
+  registerUser,
+} from "../controllers/user.js";
+import { isAuthenticated } from "../middlewares/auth.js";
+const router = express.Router();
+router.post("/register", registerUser);
+router.post("/login", login);
+router.get("/getDetail/:id", getMyDetails);
+router.get("/currentUser", isAuthenticated, getCurrentUser);
+router.get("/logout", logout);
 // import {
 //   deleteUser,
 //   getAllUsers,
@@ -8,13 +21,10 @@ import { registerUser } from "../controllers/user.js";
 //   registerUser,
 //   updateUser,
 // } from "../controllers/user.js";
-const router = express.Router();
 
 // router.get("/", (req, res) => {
 //   res.send("Hello World!");
 // });
-
-router.post("/register", registerUser);
 
 // router.get("/all", getAllUsers);
 
